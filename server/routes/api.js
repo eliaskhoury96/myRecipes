@@ -1,29 +1,37 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios');
-const dairyIngredients = ["cream","cheese","milk","butter","creme","ricotta","mozzarella","custard","cream cheese","condensed milk"]
-const glutenIngredients = ["flour","bread","spaghetti","biscuits","beer"]
-
+const recipesFilter= require('./recpises');
+const recipesClass= new recipesFilter.recipes()
 const recUrl ='https://recipes-goodness-elevation.herokuapp.com/recipes/ingredient/'
 router.get('/recipes/:intergating', function (request, response) { 
     const intergating = request.params.intergating;
     const dairy = request.query.dairy ;
     const gluten= request.query.gluten ;
     axios.get(recUrl + intergating)
-    .then((result)=> { const recipes= {recipes:FilteringRecipes(result.data.results)} 
-    
-    if (dairy ===`true`)
-    recipes.recipes = dairyFliter(recipes.recipes)
-    if ( gluten ===`true`)
-    recipes.recipes = glutenFliter(recipes.recipes)
+    .then((result)=> { const recipes= {recipes:recipesClass.FilteringRecipes(result.data.results)} 
 
-    
-    response.json(recipes)})
+    if (dairy ===`true`)
+    recipes.recipes = recipesClass.dairyFliter(recipes.recipes)
+    if ( gluten ===`true`)
+    recipes.recipes = recipesClass.glutenFliter(recipes.recipes)
+    response.status(201).json(recipes)})
     .catch((error)=> console.log(error))
 
 })
 
-  function dairyFliter (results){
+ /* try{
+      
+    } catch (error) {
+        if (error instanceof InvalidingredientError){
+            res.status(400).send({ "Error": `${ingredient} is not a valid ingredient` })
+        } 
+        
+    }
+})
+   */ 
+
+  /*function dairyFliter (results){
     const dairyArr = []
     for( let result of results){
     const found = result.ingredients.some(r=> dairyIngredients.includes(r.toLowerCase()))
@@ -58,7 +66,7 @@ const FilteringRecipes = function(arr) {
     return FilteringRecipesArr;
 }
 
-
+*/
 
     
 
