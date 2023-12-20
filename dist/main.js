@@ -1,3 +1,5 @@
+
+
 const renderer = new Renderer()
  function search() {
     let ingredient = $('#ingredientInput').val()
@@ -6,7 +8,11 @@ const renderer = new Renderer()
   $.get(`/recipes/`+ ingredient +`?dairy=${dairy}&gluten=${gluten}`) .then((results)=> {
     console.log(results)
    renderer.renderresults(results)
+  }).catch((error)=>{
+    alert(error.responseJSON.Error)
+
   })
+  
 }
     
 $("#recipeList").on("click", "img", function() {

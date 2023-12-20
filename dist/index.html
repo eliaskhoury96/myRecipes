@@ -19,6 +19,9 @@
 
 
         <script id="recipe-template" type="text/x-handlebars-template">
+            {{#if recipes}}
+           
+
             {{#each recipes}}
             <div class="recipe">
                 
@@ -35,6 +38,9 @@
                 </ul>
                 </div>
                 {{/each}}
+                {{else}} 
+                <div> no recipes</div>
+                {{/if}}
                 </script>
             </div>
             <script src="./handlebars/dist/handlebars.js"></script>

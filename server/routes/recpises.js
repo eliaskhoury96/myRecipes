@@ -1,9 +1,14 @@
-
+const errors =require('./errors')
 
 const dairyIngredients = ["cream","cheese","milk","butter","creme","ricotta","mozzarella","custard","cream cheese","condensed milk"]
 const glutenIngredients = ["flour","bread","spaghetti","biscuits","beer"]
 
 class recipes{
+    checkIngrediants(ingrediant){
+        if (!ingrediant.match(/^[a-z]+$/i) ) {
+            throw new errors.InvalidingredientError()
+        }
+    }
 
     dairyFliter (results){
         const dairyArr = []
