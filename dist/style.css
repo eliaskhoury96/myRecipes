@@ -64,11 +64,7 @@ button:hover {
     margin-top: 5px;
 }
 
-#recipeList {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
+   
 
 .recipe {
     background-color: #f4d03f;
@@ -91,7 +87,12 @@ button:hover {
     text-decoration: underline;
 }
 
-
+.recipes {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+     
 
 
 

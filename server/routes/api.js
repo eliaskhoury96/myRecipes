@@ -14,7 +14,7 @@ router.get('/recipes/:intergating', function (request, response) {
         recipesClass.checkIngrediants(intergating)
      } catch (error) {
          if (error instanceof errors.InvalidingredientError){
-           return   response.status(400).send({ "Error": `${intergating} is not a valid ingredient` })
+           return   response.status(400).send({ "Error": `${intergating} I don't have that ingredient` })
          } 
          
      }
