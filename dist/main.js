@@ -1,5 +1,3 @@
-
-
 const renderer = new Renderer()
  function search() {
     let ingredient = $('#ingredientInput').val()

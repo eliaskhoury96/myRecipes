@@ -17,12 +17,10 @@
          <label for="vehicle2"> Gluten</label> 
                <div id="recipeList"></div>
 
-
         <script id="recipe-template" type="text/x-handlebars-template">
             {{#if recipes}}
             found {{recipes.length}} recipes 
             <div class="recipes">
-            
             {{#each recipes}}
             <div class="recipe">
                 
@@ -37,6 +35,8 @@
                     <li>{{this}}</li>
                     {{/each}}
                 </ul>
+                <p> chef : {{chef}}</p>
+                <P>stars :{{rating}}</P>
                 </div>
                 {{/each}}
             </div>
