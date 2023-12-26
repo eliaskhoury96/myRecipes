@@ -7,6 +7,7 @@ const glutenIngredients = ["flour","bread","spaghetti","biscuits","beer"];
 class recipes {
     createRecipeObject(recipe) {
         const chef = this.generateChefName();
+
         const rating = this.generateRating();
 
         return {
@@ -36,36 +37,28 @@ class recipes {
         }
     }
 
-    dairyFliter(results) {
-        const dairyArr = [];
+    filterRecipes(results, ingredients) {
+        const filteredArr = [];
         for (let result of results) {
-            const found = result.ingredients.some(r => dairyIngredients.includes(r.toLowerCase()));
+            const found = result.ingredients.some(r => ingredients.includes(r.toLowerCase()));
             if (!found) {
-                dairyArr.push(result);
+                filteredArr.push(result);
             }
         }
-        return dairyArr;
+        return filteredArr;
     }
 
-    glutenFliter(results) {
-        const glutenArr = [];
-        for (let result of results) {
-            const found = result.ingredients.some(r => glutenIngredients.includes(r.toLowerCase()));
-            if (!found) {
-                glutenArr.push(result);
-            }
-        }
-        return glutenArr;
+    dairyFilter(results) {
+        return this.filterRecipes(results,dairyIngredients);
     }
 
-    FilteringRecipes(arr) {
-        let filteringRecipesArr = arr.map(recipe => {
-            const recipeObject = this.createRecipeObject(recipe);
-            return recipeObject
-        });
+    glutenFilter(results) {
+        return this.filterRecipes(results,glutenIngredients);
+    }
 
-        return filteringRecipesArr;
+    filteringRecipes(arr) {
+        return arr.map(recipe => this.createRecipeObject(recipe));
     }
 }
 
-module.exports = { recipes }
+module.exports = recipes;

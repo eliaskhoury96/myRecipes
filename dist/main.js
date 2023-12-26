@@ -4,7 +4,6 @@ const renderer = new Renderer()
     const dairy=($('#vehicle1').is(":checked"))
     const gluten=($('#vehicle2').is(":checked"))
   $.get(`/recipes/`+ ingredient +`?dairy=${dairy}&gluten=${gluten}`) .then((results)=> {
-    console.log(results)
    renderer.renderresults(results)
   }).catch((error)=>{
     alert(error.responseJSON.Error)
