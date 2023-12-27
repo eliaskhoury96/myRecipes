@@ -9,8 +9,9 @@ const renderer = new Renderer()
     page = 0
  }
  lastIngredient = ingredient
-    const dairy=($('#vehicle1').is(":checked"))
-    const gluten=($('#vehicle2').is(":checked"))
+
+    const dairy=($('#dairy').is(":checked"))
+    const gluten=($('#gluten').is(":checked"))
   $.get(`/recipes/`+ ingredient +`?dairy=${dairy}&gluten=${gluten}&page=${page}&pagination=${pagination}`) .then((results)=> {
    renderer.renderresults(results)
   }).catch((error)=>{

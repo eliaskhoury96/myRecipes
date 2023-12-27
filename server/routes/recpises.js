@@ -70,6 +70,7 @@ class recipes {
             return axios.get(url)
             .then (response =>{
                 let gifUrl = response.data.data[0].embed_url
+                console.log(gifUrl)
                 item.gifUrl = gifUrl;
                 return item;
             }).catch(error =>{
