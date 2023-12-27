@@ -1,5 +1,8 @@
 const errors = require('./errors');
 const {faker} =require(`@faker-js/faker`)
+const axios = require('axios');
+const { response } = require('express');
+const { error } = require('jquery');
 
 const dairyIngredients = ["cream","cheese","milk","butter","creme","ricotta","mozzarella","custard","cream cheese","condensed milk"];
 const glutenIngredients = ["flour","bread","spaghetti","biscuits","beer"];
@@ -7,7 +10,6 @@ const glutenIngredients = ["flour","bread","spaghetti","biscuits","beer"];
 class recipes {
     createRecipeObject(recipe) {
         const chef = this.generateChefName();
-
         const rating = this.generateRating();
 
         return {
@@ -18,6 +20,7 @@ class recipes {
             href: recipe.href,
             chef: chef,
             rating: rating,
+
         };
     }
 
@@ -58,6 +61,24 @@ class recipes {
 
     filteringRecipes(arr) {
         return arr.map(recipe => this.createRecipeObject(recipe));
+    }
+    addGifs(arr){
+        const gifRequests = arr.map(function(item){
+            let title = item.title
+            let api_key = "Icd7iG6kDWzHeBccgIStjf6CBcLGOWNz"
+            let url = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=" + api_key + "limit=1";
+            return axios.get(url)
+            .then (response =>{
+                let gifUrl = response.data.data[0].embed_url
+                item.gifUrl = gifUrl;
+                return item;
+            }).catch(error =>{
+                console.log(error)
+                return item;
+
+            })
+         })
+         return Promise.all(gifRequests);
     }
 }
 

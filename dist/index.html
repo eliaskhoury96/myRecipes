@@ -26,7 +26,7 @@
                 
                 <p>ID: {{idMeal}}</p>
                 <p>Title: {{title}}</p>
-                <p>Thumbnail:<br> <img src="{{thumbnail}}" alt="Recipe Thumbnail"></p>
+                <p>Thumbnail:<br> <iframe src="{{gifUrl}}" alt="Recipe Thumbnail"></iframe></p>
                 <p>Link: <a href="{{href}}" target="_blank">Recipe Video</a></p>
                 <p>Ingredients:</p>
                 <ul>
@@ -37,8 +37,11 @@
                 </ul>
                 <p> chef : {{chef}}</p>
                 <P>stars :{{rating}}</P>
+                <button id="send-mail"onclick="sendMail(`{{title}}`,`{{href}}`)">email us</button>
                 </div>
                 {{/each}}
+                <button id="back" onclick="back()">Back</button>
+                <button id="next" onclick="next()">Next</button>
             </div>
                 {{else}} 
                 <div> no recipes</div>
